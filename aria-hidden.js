@@ -1,9 +1,6 @@
 ko.bindingHandlers.accessibility_AriaHidden = {
   update: function (element, valueAccessor) {
-    var value = valueAccessor();
-    if( typeof(value) == 'function'){
-      value = valueAccessor()();
-    }
+    var value = ko.utils.unwrapObservable(valueAccessor());
     if( typeof(value) == 'undefined' || value > 0 || value === true ){
       value = false;
     } else {
