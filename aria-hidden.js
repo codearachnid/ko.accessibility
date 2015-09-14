@@ -1,9 +1,15 @@
 ko.bindingHandlers.accessibility_AriaHidden = {
-  init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-    element.setAttribute( "aria-hidden", (!valueAccessor()).toString() );
-  },
   update: function (element, valueAccessor) {
-    element.setAttribute( "aria-hidden", (!valueAccessor()).toString() );
+    var value = valueAccessor();
+    if( typeof(value) == 'function'){
+      value = valueAccessor()();
+    }
+    if( typeof(value) == 'undefined' || value > 0 || value === true ){
+      value = false;
+    } else {
+      value = true;
+    }
+    element.setAttribute( "aria-hidden", (value).toString() );
   }
 };
 
